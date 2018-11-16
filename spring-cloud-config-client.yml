@@ -1,0 +1,17 @@
+spring: 
+  profiles: 
+    active: prod
+---
+server:
+  port: 2222
+  
+spring:
+  profiles: dev
+  
+---
+server:
+  port: 2221
+  
+spring:
+  profiles: prod
+  
