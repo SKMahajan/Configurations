@@ -8,10 +8,13 @@ server:
 spring:
   profiles: dev
   
+message: from yml dev
 ---
 server:
   port: 2221
   
 spring:
   profiles: prod
+	
+message: from yml prod
   
