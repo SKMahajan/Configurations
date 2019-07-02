@@ -1,0 +1,75 @@
+server:
+  port: 5555
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://INPUHJPC04133:8761/eureka/
+ui:
+  serverUrl: http://localhost:4200/
+zuul:
+  ribbon:
+    eager-load:
+      enabled: true
+  routes:
+    prefix: 
+    customersApi:
+      serviceId: CUSTOMER-SERVICE
+    itemsApi:
+      serviceId: ITEM-SERVICE
+    salesApi:
+      serviceId: SALESORDER-SERVICE
+customersApi:
+  ribbon:
+    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RoundRobinRule
+    ConnectTimeout: 10000
+    ReadTimeout: 30000
+    MaxTotalHttpConnections: 500
+    MaxConnectionsPerHost: 100
+itemsApi:
+  ribbon:
+    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RoundRobinRule
+    ConnectTimeout: 10000
+    ReadTimeout: 30000
+    MaxTotalHttpConnections: 500
+    MaxConnectionsPerHost: 100
+salesApi:
+  ribbon:
+    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RoundRobinRule
+    ConnectTimeout: 10000
+    ReadTimeout: 30000
+    MaxTotalHttpConnections: 500
+    MaxConnectionsPerHost: 100
+# Increase the Hystrix timeout to 60s (for all)
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 60000
+    customersApi:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 60000
+    itemsApi:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 60000
+    salesApi:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 60000
+# Disable Hystrix timeout globally (for all services)
+#hystrix.command.default.execution.timeout.enabled: false
+
+# Disable Hystrix timeout for a single service
+#hystrix.command.<serviceName>.execution.timeout.enabled: false
+
+# Increase the Hystrix timeout to 60s (globally)
+#hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 60000
+
+# Increase the Hystrix timeout to 60s (per service)
+#hystrix.command.<serviceName>.execution.isolation.thread.timeoutInMilliseconds: 60000

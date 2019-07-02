@@ -1,0 +1,38 @@
+db:
+  name: customerdb
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://INPUHJPC04133:8761/eureka/
+
+ui:
+  serverUrl: http://localhost:4200/
+management:
+  endpoint:
+    chaosmonkey:
+      enabled: true
+    chaosmonkeyjmx:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+spring:
+  jmx:
+    default-domain: Customer-Service
+  jpa:
+    hibernate:
+      ddl-auto: none
+chaos:
+  monkey:
+    enabled: false
+    assaults:
+      latency-active: false
+      latency-range-start: 1000
+      latency-range-end: 4500
+      level: 1
+    watcher:
+      controller: true
+      restController: true
+      service: true
+      repository: true

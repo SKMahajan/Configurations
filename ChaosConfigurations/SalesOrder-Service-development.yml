@@ -1,0 +1,45 @@
+db:
+  name: salesorderdb
+spring:
+  kafka:
+    bootstrap-servers: INPUHJPC04133:9092
+    consumer:
+      group-id: myGroup
+  mail:
+    host: localhost
+    port: 25
+  jmx:
+    default-domain: SalesOrder-Service
+  jpa:
+    hibernate:
+      ddl-auto: none
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://INPUHJPC04133:8761/eureka/
+     
+ui:
+  serverUrl: http://localhost:4200/ 
+management:
+  endpoint:
+    chaosmonkey:
+      enabled: true
+    chaosmonkeyjmx:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+chaos:
+  monkey:
+    enabled: false
+    assaults:
+      latency-active: false
+      latency-range-start: 1000
+      latency-range-end: 4500
+      level: 1
+    watcher:
+      controller: true
+      restController: true
+      service: true
+      repository: true
